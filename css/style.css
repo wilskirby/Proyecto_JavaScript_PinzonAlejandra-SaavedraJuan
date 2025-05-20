@@ -1,0 +1,48 @@
+body {
+    background-image: url(../imgs/image_3.webp);
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000;
+}
+
+.form-control {
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    border-bottom: 2px solid #6c757d;
+    color: #f8f9fa;
+    padding-left: 2.5rem;
+}
+
+.form-control:focus {
+    background-color: transparent;
+    color: #f8f9fa;
+    box-shadow: none;
+}
+
+.form-control::placeholder {
+    color: #adb5bd;
+}
+
+.input-group-text {
+    background-color: transparent;
+    border: none;
+    color: #6c757d;
+    position: absolute;
+    z-index: 10;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.login-container {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.login-btn {
+    letter-spacing: 1px;
+}

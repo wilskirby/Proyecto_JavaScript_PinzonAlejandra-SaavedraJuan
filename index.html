@@ -1,55 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <style>
-        body {
-            background-image: url(./imgs/image_3.webp);
-            background-size: cover;
-            background-position: center;
-        }
-    </style>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/style.css" rel="stylesheet">
+    
 </head>
-    <body class="min-h-screen flex items-center justify-center bg-black">
-        <div class="w-full max-w-md px-6">
-            <div class="text-center mb-10">
-              <div class="text-center mb-10 flex justify-center">
-                <img alt="f1" src="./imgs/image_2.webp" class="mx-auto">
-              </div>
-                <h1 class="text-white text-5xl font-bold tracking-wider">START</h1>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-6 col-lg-5">
+                <div class="text-center mb-5">
+                    <div class="mb-4">
+                        <img src="./imgs/image_2.webp" alt="f1" class="img-fluid">
+                    </div>
+                    <h1 class="text-white fw-bold display-5" style="letter-spacing: 0.1em;">START</h1>
+                </div>
+                
+                <div class="login-container p-4 rounded shadow">
+                    <form>
+                        <div class="mb-4 position-relative">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+                                    </svg>
+                                </span>
+                                <input type="text" class="form-control" placeholder="Usuario">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4 position-relative">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
+                                        <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                                    </svg>
+                                </span>
+                                <input type="password" class="form-control" placeholder="Contraseña">
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <a href="./inicio.html" class="btn btn-danger login-btn py-2 fw-medium">
+                                LOG IN
+                            </a>
+                        </div>
+                    </form>
+                </div>
             </div>
-
-            <form class="bg-black bg-opacity-50 rounded-lg p-6 shadow-lg">
-                <div class="mb-4 relative">
-                    <div class="flex items-center border-b-2 border-gray-500">
-                        <span class="text-gray-400 mr-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
-                            </svg>
-                        </span>
-                        <input type="text" placeholder="Usuario" class="w-full py-2 bg-transparent text-gray-300 focus:outline-none" />
-                    </div>
-                </div>
-
-                <div class="mb-6 relative">
-                    <div class="flex items-center border-b-2 border-gray-500">
-                        <span class="text-gray-400 mr-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
-                            </svg>
-                        </span>
-                        <input type="password" placeholder="Contraseña" class="w-full py-2 bg-transparent text-gray-300 focus:outline-none" />
-                    </div>
-                </div>
-
-                <a href="./inicio.html" class="w-full bg-red-500 hover:bg-red-600 text-white py-3 rounded-md font-medium tracking-wide text-center block">
-                        LOG IN
-                </a>
-                </button>
-            </form>
         </div>
-    </body>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
