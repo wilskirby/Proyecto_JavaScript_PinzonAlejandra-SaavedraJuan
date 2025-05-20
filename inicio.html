@@ -1,11 +1,148 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulación Interactiva de Fórmula 1</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <p>odio a pedro</p>
+<body class="bg-black text-white h-screen flex flex-col">
+  <!-- Header -->
+  <header class="bg-red-600 px-4 py-2 flex items-center justify-between">
+    <div class="flex items-center">
+      <!-- F1 Logo placeholder -->
+      <div class="h-12 w-24 mr-4 bg-white flex items-center justify-center">
+        <img src="./imgs/image_2.webp" alt="F1 Logo" class="h-full w-full object-cover">
+      </div>
+      <h1 class="text-xl font-bold uppercase">Bienvenido a Simulación Interactiva de Formula 1</h1>
+    </div>
+    <div class="flex items-center space-x-4">
+      <!-- Settings icon -->
+      <div class="text-white">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+          <circle cx="12" cy="12" r="3"></circle>
+        </svg>
+      </div>
+      <!-- User icon -->
+      <div class="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-600">
+          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main content with carousel -->
+  <main class="flex-1 flex items-center justify-center relative overflow-hidden">
+    <!-- Background placeholder (darker) -->
+    <div class="absolute inset-0 bg-gray-900 opacity-80"></div>
+    
+    <!-- Carousel container -->
+    <div class="relative z-10 w-full max-w-5xl flex items-center px-16">
+      <!-- Left arrow -->
+      <button id="prev-button" class="absolute left-4 bg-black bg-opacity-30 hover:bg-opacity-50 p-2 rounded-full">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m15 18-6-6 6-6"></path>
+        </svg>
+      </button>
+      
+      <!-- Main carousel slide container -->
+      <div class="w-full flex justify-center">
+        <div class="carousel-container w-full max-w-lg h-80 relative">
+          <!-- Slide 1 -->
+          <div class="carousel-slide absolute inset-0 transition-opacity duration-500 bg-gray-400 flex items-center justify-center" data-title="Nuestros Equipos & Pilotos">
+            <span class="text-gray-700 text-lg font-bold">Imagen 1</span>
+          </div>
+          
+          <!-- Slide 2 -->
+          <div class="carousel-slide absolute inset-0 transition-opacity duration-500 opacity-0 bg-gray-400 flex items-center justify-center" data-title="Circuitos & Simulación">
+            <span class="text-gray-700 text-lg font-bold">Imagen 2</span>
+          </div>
+          
+          <!-- Slide 3 -->
+          <div class="carousel-slide absolute inset-0 transition-opacity duration-500 opacity-0 bg-gray-400 flex items-center justify-center" data-title="Resultados & Estadísticas">
+            <span class="text-gray-700 text-lg font-bold">Imagen 3</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Right arrow -->
+      <button id="next-button" class="absolute right-4 bg-black bg-opacity-30 hover:bg-opacity-50 p-2 rounded-full">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m9 18 6-6-6-6"></path>
+        </svg>
+      </button>
+      
+      <!-- Side images -->
+      <div class="absolute left-4 top-1/2 -translate-y-1/2 h-32 w-48 bg-gray-500 opacity-60 flex items-center justify-center">
+        <span class="text-white text-xs">Imagen lateral</span>
+      </div>
+      <div class="absolute right-4 top-1/2 -translate-y-1/2 h-32 w-48 bg-gray-500 opacity-60 flex items-center justify-center">
+        <span class="text-white text-xs">Imagen lateral</span>
+      </div>
+    </div>
+  </main>
+  
+  <!-- Footer section with dynamic text -->
+  <footer class="py-8 text-center">
+    <h2 id="title-text" class="text-4xl font-bold tracking-widest mb-2">
+      Nuestros Equipos 
+      <span class="block mt-2">& Pilotos</span>
+    </h2>
+  </footer>
+  <script>
+    // Simple carousel functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const slides = document.querySelectorAll('.carousel-slide');
+      const titleText = document.getElementById('title-text');
+      const prevButton = document.getElementById('prev-button');
+      const nextButton = document.getElementById('next-button');
+      let currentSlide = 0;
+      
+      // Function to update slide visibility
+      function showSlide(index) {
+        // Hide all slides
+        slides.forEach(slide => {
+          slide.classList.add('opacity-0');
+        });
+        
+        // Show current slide
+        slides[index].classList.remove('opacity-0');
+        
+        // Update title text
+        const titleParts = slides[index].dataset.title.split('&');
+        if (titleParts.length > 1) {
+          titleText.innerHTML = titleParts[0] + '<span class="block mt-2">& ' + titleParts[1] + '</span>';
+        } else {
+          titleText.textContent = titleParts[0];
+        }
+      }
+      
+      // Next slide function
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+      }
+      
+      // Previous slide function
+      function prevSlide() {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(currentSlide);
+      }
+      
+      // Add click event listeners to buttons
+      nextButton.addEventListener('click', nextSlide);
+      prevButton.addEventListener('click', prevSlide);
+      
+      // Auto rotate carousel
+      setInterval(nextSlide, 5000);
+      
+      // Show initial slide
+      showSlide(currentSlide);
+    });
+  </script>
 </body>
 </html>
