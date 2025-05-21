@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulación Interactiva de Fórmula 1</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: transparent;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      /* Añadimos la configuración para la imagen de fondo */
+      background-image: url('./imgs/image\ 6.png'); /* Reemplazar con tu URL real */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      position: relative;
+    }
+    
+    
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 0;
+    }
+    
+    header {
+      background-color: #dc3545;
+    }
+    
+    .carousel-slide {
+      position: absolute;
+      inset: 0;
+      transition: all 0.5s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(173, 181, 189, 0.7);
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer; /* Añadido para indicar que es clickeable */
+      transform: scale(1);
+    }
+    
+    .carousel-slide:hover {
+      transform: scale(1.02); /* Efecto hover para indicar interactividad */
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+    
+    .carousel-slide.hidden {
+      opacity: 0;
+      pointer-events: none; /* Prevenir clicks en slides ocultos */
+    }
+    
+    .carousel-slide img {
+      width: 100%;
+      height: 110%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    
+    .carousel-slide:hover img {
+      transform: scale(1.05);
+    }
+    
+    /* Overlay para indicar que es clickeable */
+    .carousel-slide::after {
+      content: "🖱️ Click para acceder";
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(220, 53, 69, 0.9);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    
+    .carousel-slide:hover::after {
+      opacity: 1;
+    }
+    
+    .side-image {
+      height: 8rem;
+      width: 12rem;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    
+    .carousel-arrow {
+      position: absolute;
+      background-color: rgba(255, 255, 255, 0.781);
+      padding: 0.5rem;
+      border-radius: 50%;
+      border: none;
+      z-index: 20;
+      transition: all 0.3s ease;
+    }
+    
+    .carousel-arrow:hover {
+      background-color: rgba(220, 53, 69, 0.9);
+      color: white;
+      transform: scale(1.1);
+    }
+    
+    .carousel-container {
+      width: 100%;
+      max-width: 32rem;
+      height: 20rem;
+      position: relative;
+    }
+    
+    .main-overlay {
+      position: absolute;
+      inset: 0;
+      background-color: rgba(33, 37, 41, 0.7);
+      background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 100%);
+    }
+    
+    .tracking-widest {
+      letter-spacing: 0.15em;
+    }
+
+    /* Modal styles para confirmación */
+
+
+    .modal-header {
+      border-bottom: 1px solid #dc3545;
+    }
+
+    .btn-f1 {
+      background: linear-gradient(45deg, #dc3545, #ff6b7a);
+      border: none;
+      color: white;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    .btn-f1:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <nav class="d-flex align-items-center justify-content-between w-200" style="height: 60px;">
+      <div class="d-flex align-items-center bg-light px-3" style="height: 100%;">
+        <img src="./imgs/image_2.webp" alt="F1 Logo" style="height: 30px;">
+      </div>
+
+      <div class="flex-grow-1 bg-danger text-white d-flex align-items-center px-4" style="height: 100%;">
+        <span class="fw-semibold fs-5 text-uppercase">Bienvenido a simulacion interactiva de formula 1</span>
+      </div>
+
+      <div class="d-flex align-items-center bg-danger px-3" style="height: 100%;">
+        <i class="bi bi-gear-fill text-white fs-4 me-3">⚙️</i>
+        <img src="./imgs/image_3.webp" alt="User" class="rounded-circle" style="height: 40px; width: 40px; object-fit: cover;">
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main content with carousel -->
+  <main class="flex-grow-1 d-flex align-items-center justify-content-center position-relative overflow-hidden" style="z-index: 1;">
+    <div class="position-relative z-1 w-100 container-fluid px-5 d-flex align-items-center">
+      <!-- Left arrow -->
+      <button id="prev-button" class="carousel-arrow start-0 ms-4">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m15 18-6-6 6-6"></path>
+        </svg>
+      </button>
+      
+      <!-- Main carousel slide container -->
+      <div class="w-100 d-flex justify-content-center">
+        <div class="carousel-container">
+          <!-- Slide 1 -->
+          <div class="carousel-slide" data-title="Nuestros Equipos & Pilotos" data-module="equipos-pilotos">
+            <img src="./imgs/image1.png" alt="Equipos y Pilotos" >
+          </div>
+          
+          <!-- Slide 2 -->
+          <div class="carousel-slide hidden" data-title="Circuitos & Simulación" data-module="circuitos-simulacion">
+            <img src="./imgs/image3.png" alt="Circuitos y Simulación" class="img-fluid">
+          </div>
+          
+          <!-- Slide 3 -->
+          <div class="carousel-slide hidden" data-title="Gestión de vehiculos" data-module="resultados-estadisticas">
+            <img src="./imgs/image2.png" alt="Gestión de vehiculos" class="img-fluid">
+          </div>
+        </div>
+      </div>
+      
+      <!-- Right arrow -->
+      <button id="next-button" class="carousel-arrow end-0 me-4">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m9 18 6-6-6-6"></path>
+        </svg>
+      </button>
+    </div>
+  </main>
+  
+  <!-- Footer section with dynamic text -->
+  <footer class="py-5 text-center" style="background: transparent; position: relative; z-index: 10;">
+    <h2 id="title-text" class="display-5 fw-bold tracking-widest mb-2 text-white" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">
+      Nuestros Equipos 
+      <span class="d-block mt-2">& Pilotos</span>
+    </h2>
+  </footer>
+
+  <!-- Modal de confirmación -->
+  <div class="modal fade" id="navigationModal" tabindex="-1" aria-labelledby="navigationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="navigationModalLabel">🏎️ Navegación F1</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="text-center">
+            <div class="mb-3">
+              <i class="fs-1">🏁</i>
+            </div>
+            <p class="mb-0">¿Deseas acceder al módulo:</p>
+            <h5 id="moduleTitle" class="text-danger mt-2"></h5>
+          </div>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-f1" id="confirmNavigation">¡Acceder al Módulo!</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const slides = document.querySelectorAll('.carousel-slide');
+      const titleText = document.getElementById('title-text');
+      const prevButton = document.getElementById('prev-button');
+      const nextButton = document.getElementById('next-button');
+      const navigationModal = new bootstrap.Modal(document.getElementById('navigationModal'));
+      const moduleTitle = document.getElementById('moduleTitle');
+      const confirmButton = document.getElementById('confirmNavigation');
+      
+      let currentSlide = 0;
+      let selectedModule = '';
+      
+      // Configuración de módulos y sus URLs
+      const moduleRoutes = {
+        'equipos-pilotos': './index/pilotos.html',
+        'circuitos-simulacion': './index/circuitos.html',
+        'resultados-estadisticas': './index/vehiculos.html'
+      };
+      
+      // Function to update slide visibility
+      function showSlide(index) {
+        slides.forEach(slide => {
+          slide.classList.add('hidden');
+        });
+        
+        slides[index].classList.remove('hidden');
+        
+        const titleParts = slides[index].dataset.title.split('&');
+        if (titleParts.length > 1) {
+          titleText.innerHTML = titleParts[0] + '<span class="d-block mt-2">& ' + titleParts[1] + '</span>';
+        } else {
+          titleText.textContent = titleParts[0];
+        }
+      }
+      
+      // Next slide function
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+      }
+      
+      // Previous slide function
+      function prevSlide() {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(currentSlide);
+      }
+      
+      // Handle slide click for navigation
+      function handleSlideClick(event) {
+        const slide = event.currentTarget;
+        const module = slide.dataset.module;
+        const title = slide.dataset.title;
+        
+        selectedModule = module;
+        moduleTitle.textContent = title;
+        navigationModal.show();
+      }
+      
+      // Handle navigation confirmation
+  function handleNavigation() {
+  if (selectedModule && moduleRoutes[selectedModule]) {
+    // Redirigir a la página correspondiente
+    window.location.href = moduleRoutes[selectedModule];
+  }
+  navigationModal.hide();
+}
+      
+      // Add event listeners
+      nextButton.addEventListener('click', nextSlide);
+      prevButton.addEventListener('click', prevSlide);
+      confirmButton.addEventListener('click', handleNavigation);
+      
+      // Add click event listeners to all slides
+      slides.forEach(slide => {
+        slide.addEventListener('click', handleSlideClick);
+      });
+      
+      // Keyboard navigation
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'ArrowLeft') {
+          prevSlide();
+        } else if (event.key === 'ArrowRight') {
+          nextSlide();
+        } else if (event.key === 'Enter' || event.key === ' ') {
+          const currentSlideElement = slides[currentSlide];
+          handleSlideClick({ currentTarget: currentSlideElement });
+        }
+      });
+      
+      // Show initial slide
+      showSlide(currentSlide);
+      
+      // Auto-hide modal after showing for demo purposes
+      document.getElementById('navigationModal').addEventListener('shown.bs.modal', function() {
+        setTimeout(() => {
+          // Opcional: auto-hide después de 5 segundos para demo
+          // navigationModal.hide();
+        }, 5000);
+      });
+    });
+  </script>
+</body>
+</html>

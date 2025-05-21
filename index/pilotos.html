@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>F1 Header</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-image: url('./imgs/image 6.png') ;
+      background-size: cover;
+      background-position: center;
+      background-color: black;
+  
+    }
+    .card-f1 {
+      width: 800px;
+      height: 920px;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 30px;
+      box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+      position: relative;
+      overflow: hidden;
+      padding: 2rem;
+    }
+    .number-f1 {
+      position: absolute;
+      bottom: 40px;
+      left: 40px;
+      font-size: 160px;
+      font-weight: 900;
+      color: orange;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+      z-index: 20;
+    }
+    .driver-img {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 600px;
+      z-index: 10;
+      object-fit: contain;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="d-flex align-items-center justify-content-between w-100 bg-danger" style="height: 80px;">
+    <!-- Left logo -->
+    <div class="d-flex align-items-center bg-secondary h-100 px-4">
+      <img src="./imgs/image_2.webp" alt="F1 Logo" style="height: 48px;">
+    </div>
+
+    <!-- Navigation -->
+    <nav class="d-flex flex-grow-1 justify-content-around text-white text-center fw-semibold fs-5">
+      <div>
+        <p class="text-secondary mb-0">EQUIPOS &</p>
+        <p class="text-secondary">PILOTOS</p>
+      </div>
+      <div>
+        <p class="mb-0">GESTIÓN DE</p>
+        <p>VEHÍCULOS</p>
+      </div>
+      <div>
+        <p class="mb-0">GESTIÓN DE</p>
+        <p>CIRCUITOS</p>
+      </div>
+      <div>
+        <p class="mb-0">AJUSTES</p>
+        <p>SIMULACIÓN</p>
+      </div>
+    </nav>
+
+    <!-- Right user section -->
+    <div class="d-flex align-items-center gap-3 pe-4">
+      <img src="./imgs/image4.png" alt="User" class="rounded-circle border border-white" style="width: 40px; height: 40px;">
+    </div>
+  </header>
+
+<!-- Cards container -->
+<div id="cards-container" class="d-flex flex-wrap justify-content-center gap-4 my-5"></div>
+
+<script>
+  fetch('https://6818a31e5a4b07b9d1d01ad4.mockapi.io/api/v1/Proyecto')
+    .then(response => response.json())
+    .then(data => {
+      const container = document.getElementById('cards-container');
+
+      data.forEach(piloto => {
+        const card = document.createElement('div');
+        card.className = 'card-f1';
+
+        card.innerHTML = `
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <p class="text-secondary fs-4 fw-semibold mb-1">${piloto.nombre.toUpperCase()}</p>
+              <p class="text-dark display-5 fw-bold">${piloto.apellido.toUpperCase()}</p>
+            </div>
+            <img src="${imagen}" alt="Auto" style="height: 96px; object-fit: contain;">
+          </div>
+          <img src="${piloto.imagenPiloto}" alt="Piloto" class="driver-img">
+          <div class="number-f1">${piloto.numero}</div>
+        `;
+
+        container.appendChild(card);
+      });
+    })
+    .catch(error => {
+      console.error('Error al cargar los datos de la API:', error);
+    });
+</script>
+      
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
