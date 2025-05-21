@@ -1,11 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>F1 Circuitos</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style4.css" />
 </head>
 <body>
-    <h>pasad</h>
+
+  <!-- Header como en la imagen compartida -->
+  <header class="d-flex align-items-center justify-content-between w-100 header-f1">
+    <!-- Logo F1 -->
+    <div class="logo-container">
+      <a href="./inicio.html">
+      <img src="../imgs/image_2.webp" alt="F1 Logo" style="width: 100px; height: auto;">
+      </a>
+    </div>
+
+    <!-- Navegación -->
+    <nav class="d-flex flex-grow-1 justify-content-around text-white text-center fw-semibold">
+      <div class="nav-item">
+        <a href="./pilotos.html" style="text-decoration: none; color: white;">
+        <p class="mb-0">EQUIPOS & PILOTOS</p>
+        </a>
+      </div>
+      <div class="nav-item">
+        <a href="./vehiculos.html" style="text-decoration: none; color: white;">
+        <p class="mb-0">GESTIÓN DE VEHÍCULOS</p>
+        </a>
+      </div>
+      <div class="nav-item active">
+        <a href="./circuitos.html" style="text-decoration: none; color: white;">
+        <p class="mb-0">GESTIÓN DE CIRCUITOS</p>
+        </a>
+      </div>
+      <div class="nav-item">
+        <p class="mb-0">AJUSTES SIMULACIÓN</p>
+      </div>
+    </nav>
+
+    <!-- Perfil usuario -->
+    <div class="d-flex align-items-center gap-3 pe-4">
+      <img src="../imgs/image4.png" alt="User" class="rounded-circle border border-white" style="width: 40px; height: 40px;">
+    </div>
+  </header>
+
+  <!-- Indicador de carga -->
+  <div id="loading" class="loading">
+    Cargando Circuitos...
+  </div>
+
+  <!-- Carrusel de circuitos -->
+  <div class="circuit-carousel-container">
+    <div class="circuit-carousel" id="circuitCarousel">
+      <!-- Los circuitos se cargarán aquí -->
+    </div>
+    
+    <!-- Controles de carrusel -->
+    <button class="carousel-control prev" id="prevCircuit">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <button class="carousel-control next" id="nextCircuit">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+  </div>
+
+  <!-- Botón para agregar circuito -->
+  <div class="d-flex justify-content-center mt-4">
+    <button class="btn-agregar-circuito" id="btnAgregarCircuito">AGREGAR CIRCUITO</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../js/script2.js"></script>
 </body>
 </html>

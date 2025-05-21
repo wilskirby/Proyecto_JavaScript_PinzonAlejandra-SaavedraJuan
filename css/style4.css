@@ -1,0 +1,266 @@
+body {
+  background-image: url('../imgs/imagen6.jpeg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-color: #15151e;
+  color: #ffffff;
+  min-height: 100vh; /* Hacer que el body tome al menos toda la altura de la ventana */
+  overflow-x: hidden; /* Prevenir scroll horizontal */
+}
+
+.header-f1 {
+  background-color: #e10600;
+  height: 60px;
+}
+
+.logo-container {
+  background-color: #ffffff;
+  height: 100%;
+  width: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-item {
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 20px;
+}
+
+.nav-item:hover {
+  background-color: rgba(255,255,255,0.1);
+}
+
+.nav-item.active {
+  background-color: rgba(255,255,255,0.2);
+}
+
+.nav-inactive {
+  color: rgba(255,255,255,0.6);
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  color: white;
+  font-size: 24px;
+}
+
+/* Estilos para el carrusel de circuitos */
+.circuit-carousel-container {
+  position: relative;
+  max-width: 90%; /* Usar porcentaje en lugar de píxeles fijos */
+  width: 1500px; /* Mucho más ancho */
+  margin: 80px auto; /* Aumentado de 60px */
+  overflow: hidden;
+}
+
+.circuit-carousel {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.circuit-slide {
+  min-width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.circuit-card {
+  width: 90%; /* Aumentado de 85% */
+  max-width: 1200px; /* Aumentado significativamente de 800px */
+  height: 580px; /* Aumentado considerablemente de 380px */
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  position: relative;
+}
+
+.circuit-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 25px; /* Aumentado de 18px */
+  align-items: center;
+}
+
+.circuit-dots {
+  font-size: 28px; /* Aumentado de 24px */
+  color: #333;
+}
+
+.circuit-name {
+  margin: 0;
+  color: #333;
+  font-weight: 700;
+  font-size: 26px; /* Aumentado de 20px */
+  display: flex;
+  align-items: center;
+}
+
+.circuit-name::before {
+  content: "";
+  display: inline-block;
+  width: 6px; /* Aumentado de 5px */
+  height: 26px; /* Aumentado de 20px */
+  background-color: #e10600;
+  margin-right: 12px; /* Aumentado de 10px */
+}
+
+.circuit-flag {
+  width: 60px; /* Aumentado significativamente de 45px */
+  height: 36px; /* Aumentado de 27px */
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.circuit-image {
+  width: 100%;
+  height: 430px; /* Aumentado significativamente de 240px */
+  background-position: center;
+  background-size: contain; /* Cambiado de "cover" a "contain" para evitar recortes */
+  background-repeat: no-repeat; /* Evitar que se repita la imagen */
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circuit-track {
+  position: relative; /* Cambiado de absolute para evitar problemas de recorte */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circuit-track img {
+  max-width: 90%; /* Aumentado de 80% */
+  max-height: 90%; /* Aumentado de 80% */
+  object-fit: contain; /* Asegurar que la imagen se muestre completa */
+}
+
+.carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 60px; /* Aumentado de 50px */
+  height: 60px; /* Aumentado de 50px */
+  background-color: rgba(255, 255, 255, 0.8); /* Incrementado ligeramente la opacidad */
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px; /* Aumentado de 18px */
+  color: #333;
+  cursor: pointer;
+  z-index: 2;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); /* Añadido sombra para más profundidad */
+}
+
+.carousel-control.prev {
+  left: 30px; /* Aumentado de 20px */
+}
+
+.carousel-control.next {
+  right: 30px; /* Aumentado de 20px */
+}
+
+.btn-agregar-circuito {
+  background-color: #e10600;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 18px 36px; /* Aumentado significativamente de 14px 28px */
+  font-weight: 700;
+  font-size: 20px; /* Aumentado de 16px */
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-bottom: 60px; /* Aumentado de 40px */
+  letter-spacing: 1px; /* Añadido para mejor legibilidad */
+  text-transform: uppercase; /* Asegurar que esté en mayúsculas */
+  box-shadow: 0 4px 12px rgba(225, 6, 0, 0.4); /* Añadido sombra para más profundidad */
+}
+
+.btn-agregar-circuito:hover {
+  background-color: #c00500;
+}
+.circuit-details {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  color: #333;
+  border-top: 3px solid #e10600;
+}
+
+.circuit-card {
+  height: auto;
+  min-height: 580px;
+}
+
+.info-box {
+  border-left: 4px solid #e10600;
+}
+
+.recent-winners {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  height: 100%;
+  border-left: 4px solid #e10600;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.recent-winners h5 {
+  color: #333;
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #e10600;
+  padding-bottom: 5px;
+  display: inline-block;
+}
+
+.recent-winners ul {
+  list-style-type: none;
+  padding-left: 5px;
+}
+
+.recent-winners li {
+  padding: 4px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.recent-winners li:last-child {
+  border-bottom: none;
+}
+
+.circuit-description {
+  margin-top: 15px;
+  border-left: 4px solid #e10600;
+}
+
+.circuit-description h4 {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+/* Hacer que las tarjetas sean responsivas */
+@media (max-width: 768px) {
+  .circuit-card {
+    height: auto;
+    min-height: 650px;
+  }
+  
+  .circuit-image {
+    height: 300px;
+  }
+}
