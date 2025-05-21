@@ -13,8 +13,7 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      /* Añadimos la configuración para la imagen de fondo */
-      background-image: url('./imgs/image\ 6.png'); /* Reemplazar con tu URL real */
+      background-image: url("../imgs/imagen6.jpeg"); /* Reemplazar con tu URL real */
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -129,13 +128,7 @@
       position: relative;
     }
     
-    .main-overlay {
-      position: absolute;
-      inset: 0;
-      background-color: rgba(33, 37, 41, 0.7);
-      background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 100%);
-    }
-    
+
     .tracking-widest {
       letter-spacing: 0.15em;
     }
@@ -167,7 +160,7 @@
   <header>
     <nav class="d-flex align-items-center justify-content-between w-200" style="height: 60px;">
       <div class="d-flex align-items-center bg-light px-3" style="height: 100%;">
-        <img src="./imgs/image_2.webp" alt="F1 Logo" style="height: 30px;">
+        <img src="../imgs/image_2.webp" alt="F1 Logo" style="height: 30px;">
       </div>
 
       <div class="flex-grow-1 bg-danger text-white d-flex align-items-center px-4" style="height: 100%;">
@@ -176,7 +169,7 @@
 
       <div class="d-flex align-items-center bg-danger px-3" style="height: 100%;">
         <i class="bi bi-gear-fill text-white fs-4 me-3">⚙️</i>
-        <img src="./imgs/image_3.webp" alt="User" class="rounded-circle" style="height: 40px; width: 40px; object-fit: cover;">
+        <img src="../imgs/image_3.webp" alt="User" class="rounded-circle" style="height: 40px; width: 40px; object-fit: cover;">
       </div>
     </nav>
   </header>
@@ -196,17 +189,17 @@
         <div class="carousel-container">
           <!-- Slide 1 -->
           <div class="carousel-slide" data-title="Nuestros Equipos & Pilotos" data-module="equipos-pilotos">
-            <img src="./imgs/image1.png" alt="Equipos y Pilotos" >
+            <img src="../imgs/image1.jpg" alt="Equipos y Pilotos" >
           </div>
           
           <!-- Slide 2 -->
           <div class="carousel-slide hidden" data-title="Circuitos & Simulación" data-module="circuitos-simulacion">
-            <img src="./imgs/image3.png" alt="Circuitos y Simulación" class="img-fluid">
+            <img src="../imgs/image3.jpg" alt="Circuitos y Simulación" class="img-fluid">
           </div>
           
           <!-- Slide 3 -->
           <div class="carousel-slide hidden" data-title="Gestión de vehiculos" data-module="resultados-estadisticas">
-            <img src="./imgs/image2.png" alt="Gestión de vehiculos" class="img-fluid">
+            <img src="../imgs/image2.png" alt="Gestión de vehiculos" class="img-fluid">
           </div>
         </div>
       </div>
