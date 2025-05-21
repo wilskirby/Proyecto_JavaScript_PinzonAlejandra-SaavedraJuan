@@ -1,6 +1,6 @@
 body {
     background-image: url('../imgs/imagen6.jpeg');
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/api/placeholder/1920/1080");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../imgs/imagen6.jpeg");
     background-size: cover;
     background-repeat: no-repeat;
     background-color: #15151e;
