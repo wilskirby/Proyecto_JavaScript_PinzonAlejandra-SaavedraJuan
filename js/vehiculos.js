@@ -1,262 +1,289 @@
-// URLs de la API
-const API_URL = 'https://6818a31e5a4b07b9d1d01ad4.mockapi.io/api/v1/Proyecto';
+        // API URL
+        const API_URL = 'https://6818a31e5a4b07b9d1d01ad4.mockapi.io/api/v1/Proyecto';
 
-// Variables globales
-let vehiculosData = [];
+        // Team CSS class mapping
+        const teamClasses = {
+            'Red Bull Racing': 'card-red-bull',
+            'Mercedes-AMG Petronas': 'card-mercedes',
+            'Ferrari': 'card-ferrari',
+            'McLaren': 'card-mclaren',
+            'BWT Alpine': 'card-alpine',
+            'Alpine': 'card-alpine',
+            'Aston Martin': 'card-aston-martin',
+            'Aston Martin Aramco': 'card-aston-martin',
+            'MoneyGram Haas': 'card-haas',
+            'Haas': 'card-haas',
+            'Visa Cash App Racing Bulls': 'card-alphatauri',
+            'AlphaTauri': 'card-alphatauri',
+            'Alfa Romeo': 'card-alfa-romeo',
+            'Williams': 'card-williams'
+        };
 
-// Función para obtener datos de la API
-async function fetchVehiculos() {
-    try {
-        const response = await fetch(API_URL);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+        async function fetchF1Data() {
+            try {
+                const response = await fetch(API_URL);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                console.log('API Data:', data);
+                return data[0]; // Get the first (and only) object from the array
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                return null;
+            }
         }
-        const data = await response.json();
-        vehiculosData = data[0].vehiculos; // Extraemos el array de vehículos
-        return vehiculosData;
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        hideLoading();
-        showError('Error al cargar los datos. Por favor, intente nuevamente.');
-        return [];
-    }
-}
 
-// Función para ocultar el indicador de carga
-function hideLoading() {
-    const loading = document.getElementById('loading');
-    if (loading) {
-        loading.style.display = 'none';
-    }
-}
-
-// Función para mostrar errores
-function showError(message) {
-    const container = document.getElementById('cardsContainer');
-    container.innerHTML = `
-        <div class="col-12 text-center">
-            <div class="alert alert-danger" role="alert">
-                ${message}
-            </div>
-        </div>
-    `;
-}
-
-// Función para obtener el color del equipo
-function getTeamColor(equipo) {
-    const teamColors = {
-        'Red Bull Racing': '#1e40af',
-        'Mercedes-AMG Petronas': '#00d2be',
-        'Aston Martin Aramco': '#006f62',
-        'BWT Alpine': '#0090ff',
-        'MoneyGram Haas': '#ffffff',
-        'Visa Cash App Racing Bulls': '#6366f1',
-        'McLaren': '#ff8700',
-        'Ferrari': '#dc2626'
-    };
-    return teamColors[equipo] || '#6b7280';
-}
-
-// Función para crear las tarjetas de vehículos
-function createVehicleCards(vehiculos) {
-    const container = document.getElementById('cardsContainer');
-    container.innerHTML = '';
-
-    vehiculos.forEach((vehiculo, index) => {
-        const teamColor = getTeamColor(vehiculo.equipo);
-        const card = document.createElement('div');
-        card.className = 'col-md-6 col-lg-4 mb-4';
-        
-        card.innerHTML = `
-            <div class="vehicle-card" style="background: linear-gradient(135deg, ${teamColor}15, ${teamColor}05);">
-                <div class="vehicle-header" style="border-left: 4px solid ${teamColor};">
-                    <h5 class="team-name" style="color: ${teamColor};">${vehiculo.equipo}</h5>
-                </div>
-                
-                <div class="vehicle-image-container">
-                    <img src="${vehiculo.imagen}" alt="${vehiculo.modelo}" class="vehicle-image" onerror="this.src='../imgs/placeholder-car.jpg'">
-                </div>
-                
-                <div class="vehicle-info">
-                    <h6 class="vehicle-model">${vehiculo.modelo}</h6>
-                    <div class="vehicle-details">
-                        <div class="detail-item">
-                            <span class="detail-label">Motor:</span>
-                            <span class="detail-value">${vehiculo.motor}</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Velocidad Máx:</span>
-                            <span class="detail-value">${vehiculo.velocidad_max_kmh} km/h</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">0-100 km/h:</span>
-                            <span class="detail-value">${vehiculo.aceleracion_0_100}s</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="vehicle-footer">
-                    <button class="btn-saber-mas" onclick="showVehicleDetails(${index})" style="background-color: ${teamColor};">
-                        <span>Saber mas...</span>
-                        <div class="btn-icon">+</div>
-                    </button>
-                </div>
-            </div>
-        `;
-        
-        container.appendChild(card);
-    });
-}
-
-// Función para mostrar detalles del vehículo en el modal
-function showVehicleDetails(index) {
-    const vehiculo = vehiculosData[index];
-    if (!vehiculo) return;
-
-    const modalTitle = document.getElementById('vehicleModalLabel');
-    const modalContent = document.getElementById('modalContent');
-    
-    modalTitle.textContent = `${vehiculo.equipo} - ${vehiculo.modelo}`;
-    
-    modalContent.innerHTML = `
-        <div class="vehicle-detail-content">
-            <div class="row">
-                <div class="col-md-6">
-                    <img src="${vehiculo.imagen}" alt="${vehiculo.modelo}" class="img-fluid rounded mb-3" style="width: 100%; height: 200px; object-fit: cover;">
-                </div>
-                <div class="col-md-6">
-                    <h5>Especificaciones Técnicas</h5>
-                    <div class="spec-grid">
-                        <div class="spec-item">
-                            <strong>Equipo:</strong> ${vehiculo.equipo}
-                        </div>
-                        <div class="spec-item">
-                            <strong>Modelo:</strong> ${vehiculo.modelo}
-                        </div>
-                        <div class="spec-item">
-                            <strong>Motor:</strong> ${vehiculo.motor}
-                        </div>
-                        <div class="spec-item">
-                            <strong>Velocidad Máxima:</strong> ${vehiculo.velocidad_max_kmh} km/h
-                        </div>
-                        <div class="spec-item">
-                            <strong>Aceleración 0-100:</strong> ${vehiculo.aceleracion_0_100} segundos
-                        </div>
-                        <div class="spec-item">
-                            <strong>Pilotos:</strong> ${vehiculo.pilotos.join(', ')}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <hr>
-            
-            <h5>Rendimiento por Modo de Conducción</h5>
-            
-            <div class="performance-tabs">
-                <ul class="nav nav-tabs" id="performanceTabs" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="normal-tab" data-bs-toggle="tab" data-bs-target="#normal" type="button" role="tab">
-                            Conducción Normal
-                        </button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="agresiva-tab" data-bs-toggle="tab" data-bs-target="#agresiva" type="button" role="tab">
-                            Conducción Agresiva
-                        </button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="ahorro-tab" data-bs-toggle="tab" data-bs-target="#ahorro" type="button" role="tab">
-                            Ahorro de Combustible
-                        </button>
-                    </li>
-                </ul>
-                
-                <div class="tab-content" id="performanceTabContent">
-                    ${createPerformanceTab('normal', vehiculo.rendimiento.conduccion_normal, true)}
-                    ${createPerformanceTab('agresiva', vehiculo.rendimiento.conduccion_agresiva, false)}
-                    ${createPerformanceTab('ahorro', vehiculo.rendimiento.ahorro_combustible, false)}
-                </div>
-            </div>
-        </div>
-    `;
-    
-    // Mostrar el modal
-    const modal = new bootstrap.Modal(document.getElementById('vehicleModal'));
-    modal.show();
-}
-
-// Función para crear el contenido de cada tab de rendimiento
-function createPerformanceTab(id, data, active) {
-    return `
-        <div class="tab-pane fade ${active ? 'show active' : ''}" id="${id}" role="tabpanel">
-            <div class="row mt-3">
-                <div class="col-md-4">
-                    <div class="performance-card">
-                        <h6>Velocidad Promedio</h6>
-                        <div class="performance-value">${data.velocidad_promedio_kmh} km/h</div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="performance-card">
-                        <h6>Consumo de Combustible</h6>
-                        <div class="weather-data">
-                            <div class="weather-item">
-                                <span class="weather-icon">☀️</span>
-                                <span>Seco: ${data.consumo_combustible.seco} L/km</span>
-                            </div>
-                            <div class="weather-item">
-                                <span class="weather-icon">🌧️</span>
-                                <span>Lluvioso: ${data.consumo_combustible.lluvioso} L/km</span>
-                            </div>
-                            <div class="weather-item">
-                                <span class="weather-icon">⛈️</span>
-                                <span>Extremo: ${data.consumo_combustible.extremo} L/km</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="performance-card">
-                        <h6>Desgaste de Neumáticos</h6>
-                        <div class="weather-data">
-                            <div class="weather-item">
-                                <span class="weather-icon">☀️</span>
-                                <span>Seco: ${data.desgaste_neumaticos.seco}%/km</span>
-                            </div>
-                            <div class="weather-item">
-                                <span class="weather-icon">🌧️</span>
-                                <span>Lluvioso: ${data.desgaste_neumaticos.lluvioso}%/km</span>
-                            </div>
-                            <div class="weather-item">
-                                <span class="weather-icon">⛈️</span>
-                                <span>Extremo: ${data.desgaste_neumaticos.extremo}%/km</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
-}
-
-// Función principal para inicializar la página
-async function initVehiculos() {
-    try {
-        const vehiculos = await fetchVehiculos();
-        hideLoading();
-        
-        if (vehiculos && vehiculos.length > 0) {
-            createVehicleCards(vehiculos);
-        } else {
-            showError('No se encontraron vehículos disponibles.');
+        function getPilotsByIds(pilotos, pilotIds) {
+            return pilotos.filter(pilot => pilotIds.includes(pilot.id));
         }
-    } catch (error) {
-        console.error('Error initializing vehicles:', error);
-        hideLoading();
-        showError('Error al inicializar la página. Por favor, recargue la página.');
-    }
-}
 
-// Inicializar cuando el DOM esté cargado
-document.addEventListener('DOMContentLoaded', initVehiculos);
+        function createPerformanceContent(rendimiento) {
+            return `
+                <div class="performance-content active" id="normal-performance">
+                    <div class="condition-group">
+                        <div class="condition-title">🌞 Condiciones Secas</div>
+                        <div class="spec-item">
+                            <span class="spec-label">Velocidad promedio:</span>
+                            <span class="spec-value">${rendimiento.conduccion_normal.velocidad_promedio_kmh} km/h</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Consumo combustible:</span>
+                            <span class="spec-value">${rendimiento.conduccion_normal.consumo_combustible.seco} L/lap</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Desgaste neumáticos:</span>
+                            <span class="spec-value">${rendimiento.conduccion_normal.desgaste_neumaticos.seco}%/lap</span>
+                        </div>
+                    </div>
+                    <div class="condition-group">
+                        <div class="condition-title">🌧️ Condiciones Lluviosas</div>
+                        <div class="spec-item">
+                            <span class="spec-label">Consumo combustible:</span>
+                            <span class="spec-value">${rendimiento.conduccion_normal.consumo_combustible.lluvioso} L/lap</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Desgaste neumáticos:</span>
+                            <span class="spec-value">${rendimiento.conduccion_normal.desgaste_neumaticos.lluvioso}%/lap</span>
+                        </div>
+                    </div>
+                    <div class="condition-group">
+                        <div class="condition-title">⚡ Condiciones Extremas</div>
+                        <div class="spec-item">
+                            <span class="spec-label">Consumo combustible:</span>
+                            <span class="spec-value">${rendimiento.conduccion_normal.consumo_combustible.extremo} L/lap</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Desgaste neumáticos:</span>
+                            <span class="spec-value">${rendimiento.conduccion_normal.desgaste_neumaticos.extremo}%/lap</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="performance-content" id="aggressive-performance">
+                    <div class="condition-group">
+                        <div class="condition-title">🌞 Condiciones Secas</div>
+                        <div class="spec-item">
+                            <span class="spec-label">Velocidad promedio:</span>
+                            <span class="spec-value">${rendimiento.conduccion_agresiva.velocidad_promedio_kmh} km/h</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Consumo combustible:</span>
+                            <span class="spec-value">${rendimiento.conduccion_agresiva.consumo_combustible.seco} L/lap</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Desgaste neumáticos:</span>
+                            <span class="spec-value">${rendimiento.conduccion_agresiva.desgaste_neumaticos.seco}%/lap</span>
+                        </div>
+                    </div>
+                    <div class="condition-group">
+                        <div class="condition-title">🌧️ Condiciones Lluviosas</div>
+                        <div class="spec-item">
+                            <span class="spec-label">Consumo combustible:</span>
+                            <span class="spec-value">${rendimiento.conduccion_agresiva.consumo_combustible.lluvioso} L/lap</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Desgaste neumáticos:</span>
+                            <span class="spec-value">${rendimiento.conduccion_agresiva.desgaste_neumaticos.lluvioso}%/lap</span>
+                        </div>
+                    </div>
+                    <div class="condition-group">
+                        <div class="condition-title">⚡ Condiciones Extremas</div>
+                        <div class="spec-item">
+                            <span class="spec-label">Consumo combustible:</span>
+                            <span class="spec-value">${rendimiento.conduccion_agresiva.consumo_combustible.extremo} L/lap</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Desgaste neumáticos:</span>
+                            <span class="spec-value">${rendimiento.conduccion_agresiva.desgaste_neumaticos.extremo}%/lap</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="performance-content" id="eco-performance">
+                    <div class="condition-group">
+                        <div class="condition-title">🌞 Condiciones Secas</div>
+                        <div class="spec-item">
+                            <span class="spec-label">Velocidad promedio:</span>
+                            <span class="spec-value">${rendimiento.ahorro_combustible.velocidad_promedio_kmh} km/h</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Consumo combustible:</span>
+                            <span class="spec-value">${rendimiento.ahorro_combustible.consumo_combustible.seco} L/lap</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Desgaste neumáticos:</span>
+                            <span class="spec-value">${rendimiento.ahorro_combustible.desgaste_neumaticos.seco}%/lap</span>
+                        </div>
+                    </div>
+                    <div class="condition-group">
+                        <div class="condition-title">🌧️ Condiciones Lluviosas</div>
+                        <div class="spec-item">
+                            <span class="spec-label">Consumo combustible:</span>
+                            <span class="spec-value">${rendimiento.ahorro_combustible.consumo_combustible.lluvioso} L/lap</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Desgaste neumáticos:</span>
+                            <span class="spec-value">${rendimiento.ahorro_combustible.desgaste_neumaticos.lluvioso}%/lap</span>
+                        </div>
+                    </div>
+                    <div class="condition-group">
+                        <div class="condition-title">⚡ Condiciones Extremas</div>
+                        <div class="spec-item">
+                            <span class="spec-label">Consumo combustible:</span>
+                            <span class="spec-value">${rendimiento.ahorro_combustible.consumo_combustible.extremo} L/lap</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Desgaste neumáticos:</span>
+                            <span class="spec-value">${rendimiento.ahorro_combustible.desgaste_neumaticos.extremo}%/lap</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function createVehicleCard(vehicle, pilotos) {
+            const vehiclePilots = getPilotsByIds(pilotos, vehicle.pilotos);
+            const cardClass = teamClasses[vehicle.equipo] || '';
+
+            return `
+                <div class="vehicle-card ${cardClass}">
+                    <div class="vehicle-card-header">
+                        <div>
+                            <h3 class="team-name">${vehicle.equipo}</h3>
+                            <div class="vehicle-model">${vehicle.modelo}</div>
+                        </div>
+                    </div>
+                    
+                    <img src="${vehicle.imagen}" alt="${vehicle.modelo}" class="car-image" 
+                         onerror="this.src='/api/placeholder/280/150'">
+                    
+                    <div class="vehicle-card-body">
+                        <div class="specs-section">
+                            <div class="section-title">Especificaciones Técnicas</div>
+                            <div class="spec-item">
+                                <span class="spec-label">Motor:</span>
+                                <span class="spec-value">${vehicle.motor}</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Velocidad Máxima:</span>
+                                <span class="spec-value">${vehicle.velocidad_max_kmh} km/h</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Aceleración 0-100:</span>
+                                <span class="spec-value">${vehicle.aceleracion_0_100}s</span>
+                            </div>
+                        </div>
+
+                        <div class="specs-section">
+                            <div class="section-title">Rendimiento por Modo</div>
+                            <div class="performance-tabs">
+                                <button class="performance-tab active" onclick="showPerformance('${vehicle.equipo}', 'normal')">Normal</button>
+                                <button class="performance-tab" onclick="showPerformance('${vehicle.equipo}', 'aggressive')">Agresivo</button>
+                                <button class="performance-tab" onclick="showPerformance('${vehicle.equipo}', 'eco')">Eco</button>
+                            </div>
+                            <div id="performance-${vehicle.equipo.replace(/\s+/g, '-')}">
+                                ${createPerformanceContent(vehicle.rendimiento)}
+                            </div>
+                        </div>
+
+                        <div class="pilots-section">
+                            <div class="section-title">Pilotos Asignados</div>
+                            ${vehiclePilots.map(pilot => `
+                                <div class="pilot-item">
+                                    <span class="pilot-name">• ${pilot.nombre}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    
+
+                </div>
+            `;
+        }
+
+        function showPerformance(teamName, mode) {
+            const containerId = `performance-${teamName.replace(/\s+/g, '-')}`;
+            const container = document.getElementById(containerId);
+            
+            // Update tabs
+            const tabs = container.parentElement.querySelectorAll('.performance-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Update content
+            const contents = container.querySelectorAll('.performance-content');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            const targetContent = container.querySelector(`#${mode}-performance`);
+            if (targetContent) {
+                targetContent.classList.add('active');
+            }
+        }
+
+        function showVehicleDetails(vehicleModel) {
+            alert(`Mostrando más detalles del ${vehicleModel}`);
+            // Aquí puedes implementar un modal o redirección con más detalles
+        }
+
+        async function loadVehicles() {
+            const loadingElement = document.getElementById('loading');
+            const containerElement = document.getElementById('vehicles-container');
+            
+            try {
+                const data = await fetchF1Data();
+                
+                if (!data || !data.vehiculos) {
+                    throw new Error('No se pudieron cargar los datos de vehículos');
+                }
+
+                const { vehiculos, pilotos } = data;
+                
+                // Create vehicle cards
+                const vehiclesHTML = vehiculos.map(vehicle => 
+                    createVehicleCard(vehicle, pilotos)
+                ).join('');
+                
+                containerElement.innerHTML = vehiclesHTML;
+                
+                // Hide loading and show content
+                loadingElement.style.display = 'none';
+                containerElement.style.display = 'grid';
+                
+            } catch (error) {
+                console.error('Error loading vehicles:', error);
+                loadingElement.innerHTML = `
+                    <div class="text-center">
+                        <div class="text-danger mb-3">
+                            <i class="fas fa-exclamation-triangle fa-3x"></i>
+                        </div>
+                        <h3>Error al cargar los vehículos</h3>
+                        <p>${error.message}</p>
+                        <button class="btn btn-light" onclick="loadVehicles()">Intentar de nuevo</button>
+                    </div>
+                `;
+            }
+        }
+
+        // Load vehicles when page loads
+        document.addEventListener('DOMContentLoaded', loadVehicles);
