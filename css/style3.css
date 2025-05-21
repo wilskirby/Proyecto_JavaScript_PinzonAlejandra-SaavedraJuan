@@ -1,0 +1,81 @@
+    body {
+        background-image: url('../imgs/imagen6.jpeg');
+        background-size: cover;
+        background-repeat: no-repeat;
+      background-color: #15151e;
+      color: #ffffff;
+    }
+    .header-f1 {
+      background-color: #e10600;
+      height: 60px;
+    }
+    .logo-container {
+      background-color: #ffffff;
+      height: 100%;
+      width: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-f1 {
+      width: 800px;
+      height: 920px;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 30px;
+      box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+      position: relative;
+      overflow: hidden;
+      padding: 2rem;
+      margin-bottom: 30px;
+    }
+    .number-f1 {
+      position: absolute;
+      bottom: 40px;
+      left: 40px;
+      font-size: 160px;
+      font-weight: 900;
+      color: orange;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+      z-index: 20;
+    }
+    .driver-img {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 600px;
+      z-index: 10;
+      object-fit: contain;
+    }
+    .loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 300px;
+      color: white;
+      font-size: 24px;
+    }
+    .nav-item {
+      cursor: pointer;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 20px;
+    }
+    .nav-item:hover {
+      background-color: rgba(255,255,255,0.1);
+    }
+    .nav-inactive {
+      color: rgba(255,255,255,0.6);
+    }
+    .team-badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 4px;
+      background-color: #f1f1f1;
+      color: #333;
+      font-size: 14px;
+      font-weight: 600;
+      margin-top: 8px;
+    }
