@@ -1,11 +1,13 @@
 body {
-    background-color: transparent;
-    color: #fff;
+    background-color: black;
+    color: #000000;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     background-image: url("../imgs/imagen6.jpeg"); /* Reemplazar con tu URL real */
     background-size: cover;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+    url("../imgs/imagen6.jpeg");
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -13,11 +15,11 @@ body {
   }
 
   .header-f1 {
-    background-color: #e10600;
+    background-color: #0f0f0f;
     height: 60px;
   }
   .logo-container {
-    background-color: #ffffff;
+    background-color: #fffefe;
     height: 100%;
     width: 160px;
     display: flex;
