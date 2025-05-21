@@ -1,0 +1,315 @@
+body {
+    background-image: url('../imgs/imagen6.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+  background-color: #15151e;
+  color: #000000;
+}
+.header-f1 {
+  background-color: #e10600;
+  height: 60px;
+}
+.logo-container {
+  background-color: #ffffff;
+  height: 100%;
+  width: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card-f1 {
+  width: 800px;
+  height: 920px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 30px;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+  padding: 2rem;
+  margin-bottom: 30px;
+}
+.number-f1 {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  font-size: 160px;
+  font-weight: 900;
+  color: orange;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+  z-index: 20;
+}
+.driver-img {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 600px;
+  z-index: 10;
+  object-fit: contain;
+}
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  color: white;
+  font-size: 24px;
+}
+.nav-item {
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 20px;
+}
+.nav-item:hover {
+  background-color: rgba(255,255,255,0.1);
+}
+.nav-inactive {
+  color: rgba(255,255,255,0.6);
+}
+.team-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background-color: #f1f1f1;
+  color: #333;
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+
+/* Estilos para las tarjetas de vehículos */
+.vehicle-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.vehicle-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+}
+
+.vehicle-header {
+    padding-left: 15px;
+    margin-bottom: 15px;
+}
+
+.team-name {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.vehicle-image-container {
+    text-align: center;
+    margin-bottom: 15px;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+}
+
+.vehicle-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.vehicle-card:hover .vehicle-image {
+    transform: scale(1.05);
+}
+
+.vehicle-info {
+    margin-bottom: 20px;
+}
+
+.vehicle-model {
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.vehicle-details {
+    background: rgba(248, 249, 250, 0.8);
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 3px solid #007bff;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.detail-item:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    font-weight: 500;
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.detail-value {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 0.9rem;
+}
+
+.vehicle-footer {
+    text-align: center;
+}
+
+.btn-saber-mas {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.9rem;
+}
+
+.btn-saber-mas:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+}
+
+.btn-icon {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* Estilos para el modal */
+.vehicle-detail-content {
+    color: #2c3e50;
+}
+
+.spec-grid {
+    display: grid;
+    gap: 10px;
+}
+
+.spec-item {
+    padding: 10px;
+    background: rgba(248, 249, 250, 0.8);
+    border-radius: 6px;
+    border-left: 3px solid #007bff;
+}
+
+.performance-tabs {
+    margin-top: 20px;
+}
+
+.performance-card {
+    background: rgba(248, 249, 250, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    height: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.performance-card h6 {
+    color: #6c757d;
+    margin-bottom: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.85rem;
+}
+
+.performance-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.weather-data {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.weather-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    background: white;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.weather-icon {
+    font-size: 1.2rem;
+}
+
+.nav-tabs .nav-link {
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.nav-tabs .nav-link.active {
+    color: #007bff;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .vehicle-card {
+        margin-bottom: 15px;
+    }
+    
+    .vehicle-model {
+        font-size: 1.1rem;
+    }
+    
+    .btn-saber-mas {
+        padding: 10px 25px;
+        font-size: 0.8rem;
+    }
+    
+    .weather-data {
+        gap: 5px;
+    }
+    
+    .weather-item {
+        font-size: 0.8rem;
+        padding: 6px;
+    }
+}
