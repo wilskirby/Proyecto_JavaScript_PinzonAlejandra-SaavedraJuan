@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,31 +19,31 @@
       </a>
     </div>
 
-        <div class="d-flex flex-grow-1 justify-content-around text-white text-center fw-semibold">
-            <div class="nav-item">
-                <a href="./pilotos.html" style="text-decoration: none; color: white;">
-                    <p class="mb-0">EQUIPOS & PILOTOS</p>
-                </a>
-            </div>
-            <div class="nav-item">
-                <a href="./vehiculos.html" style="text-decoration: none; color: white;">
-                    <p class="mb-0">GESTIÓN DE VEHÍCULOS</p>
-                </a>
-            </div>
-            <div class="nav-item">
-                <a href="./circuitos.html" style="text-decoration: none; color: white;">
-                    <p class="mb-0">GESTIÓN DE CIRCUITOS</p>
-                </a>
-            </div>
-            <div class="nav-item">
-                <p class="mb-0">AJUSTES SIMULACIÓN</p>
-            </div>
-            <div class="nav-item">
-                <a href="./admin.html" style="text-decoration: none; color: white;">
-                    <img src="../imgs/image4.png" alt="User" class="rounded-circle border border-white" style="width: 40px; height: 40px;">
-                </a>
-            </div>
-        </div>
+    <div class="d-flex flex-grow-1 justify-content-around text-white text-center fw-semibold">
+      <div class="nav-item">
+        <a href="./pilotos.html" style="text-decoration: none; color: white;">
+          <p class="mb-0">EQUIPOS & PILOTOS</p>
+        </a>
+      </div>
+      <div class="nav-item">
+        <a href="./vehiculos.html" style="text-decoration: none; color: white;">
+          <p class="mb-0">GESTIÓN DE VEHÍCULOS</p>
+        </a>
+      </div>
+      <div class="nav-item">
+        <a href="./circuitos.html" style="text-decoration: none; color: white;">
+          <p class="mb-0">GESTIÓN DE CIRCUITOS</p>
+        </a>
+      </div>
+      <div class="nav-item">
+        <p class="mb-0">AJUSTES SIMULACIÓN</p>
+      </div>
+      <div class="nav-item">
+        <a href="./admin.html" style="text-decoration: none; color: white;">
+          <img src="/api/placeholder/40/40" alt="User" class="rounded-circle border border-white" style="width: 40px; height: 40px;">
+        </a>
+      </div>
+    </div>
   </header>
 
   <!-- Indicador de carga -->
@@ -71,6 +71,115 @@
     <button class="btn-agregar-circuito" id="btnAgregarCircuito">AGREGAR CIRCUITO</button>
   </div>
 
+  <!-- Modal para agregar circuito -->
+  <div class="modal fade" id="modalAgregarCircuito" tabindex="-1" aria-labelledby="modalAgregarCircuitoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalAgregarCircuitoLabel">
+            <i class="fas fa-plus-circle me-2"></i>AGREGAR NUEVO CIRCUITO
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Alertas -->
+          <div id="alertContainer"></div>
+          
+          <form id="formAgregarCircuito">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="nombreCircuito" class="form-label">
+                  <i class="fas fa-flag-checkered me-2"></i>Nombre del Circuito
+                </label>
+                <input type="text" class="form-control" id="nombreCircuito" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="paisCircuito" class="form-label">
+                  <i class="fas fa-globe me-2"></i>País
+                </label>
+                <select class="form-select" id="paisCircuito" required>
+                  <option value="">Seleccionar país</option>
+                  <option value="Mónaco">Mónaco</option>
+                  <option value="Reino Unido">Reino Unido</option>
+                  <option value="Bélgica">Bélgica</option>
+                  <option value="Italia">Italia</option>
+                  <option value="Brasil">Brasil</option>
+                  <option value="Emiratos Árabes Unidos">Emiratos Árabes Unidos</option>
+                  <option value="Japón">Japón</option>
+                  <option value="Alemania">Alemania</option>
+                  <option value="España">España</option>
+                  <option value="Canadá">Canadá</option>
+                  <option value="Francia">Francia</option>
+                  <option value="Austria">Austria</option>
+                  <option value="Estados Unidos">Estados Unidos</option>
+                  <option value="México">México</option>
+                  <option value="Singapur">Singapur</option>
+                  <option value="Australia">Australia</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-4 mb-3">
+                <label for="longitudCircuito" class="form-label">
+                  <i class="fas fa-ruler me-2"></i>Longitud (km)
+                </label>
+                <input type="number" step="0.01" class="form-control" id="longitudCircuito" required>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="vueltasCircuito" class="form-label">
+                  <i class="fas fa-repeat me-2"></i>Número de Vueltas
+                </label>
+                <input type="number" class="form-control" id="vueltasCircuito" required>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="imagenCircuito" class="form-label">
+                  <i class="fas fa-image me-2"></i>URL de Imagen
+                </label>
+                <input type="url" class="form-control" id="imagenCircuito" required>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="descripcionCircuito" class="form-label">
+                <i class="fas fa-info-circle me-2"></i>Descripción
+              </label>
+              <textarea class="form-control" id="descripcionCircuito" rows="4" required></textarea>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4 mb-3">
+                <label for="tiempoRecord" class="form-label">
+                  <i class="fas fa-stopwatch me-2"></i>Tiempo Récord
+                </label>
+                <input type="text" class="form-control" id="tiempoRecord" placeholder="1:23.456">
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="pilotoRecord" class="form-label">
+                  <i class="fas fa-user me-2"></i>Piloto Récord
+                </label>
+                <input type="text" class="form-control" id="pilotoRecord">
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="anoRecord" class="form-label">
+                  <i class="fas fa-calendar me-2"></i>Año Récord
+                </label>
+                <input type="number" class="form-control" id="anoRecord" min="1950" max="2024">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            <i class="fas fa-times me-2"></i>Cancelar
+          </button>
+          <button type="button" class="btn btn-f1-primary" id="btnGuardarCircuito">
+            <i class="fas fa-save me-2"></i>Guardar Circuito
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,7 +7,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/style6.css" rel="stylesheet">
 </head>
-<body>
     <!-- Header como en la imagen compartida -->
     <header class="d-flex align-items-center justify-content-between w-100 header-f1">
         <!-- Logo F1 -->
@@ -17,10 +16,11 @@
             </a>
         </div>
 
+
         <!-- Navegación -->
-        <div class="d-flex flex-grow-1 justify-content-around text-white text-center fw-semibold">
+        <nav class="d-flex flex-grow-1 justify-content-around text-white text-center fw-semibold">
             <div class="nav-item">
-                <a href="./pilotos.html" style="text-decoration: none; color: white;">
+                <a href="./circuitos.html" style="text-decoration: none; color: white;">
                     <p class="mb-0">EQUIPOS & PILOTOS</p>
                 </a>
             </div>
@@ -37,17 +37,22 @@
             <div class="nav-item">
                 <p class="mb-0">AJUSTES SIMULACIÓN</p>
             </div>
-            <div class="nav-item">
-                <a href="./admin.html" style="text-decoration: none; color: white;">
-                    <img src="../imgs/image4.png" alt="User" class="rounded-circle border border-white" style="width: 40px; height: 40px;">
-                </a>
-            </div>
+        </nav>
+
+        <div class="d-flex align-items-center gap-3 pe-4">
+            <img src="../imgs/image4.png" alt="User" class="rounded-circle border border-white" style="width: 40px; height: 40px;">
+
         </div>
     </header>
-
+    <body>
     <!-- Main Content -->
     <main>
-        <h1 class="page-title">VEHÍCULOS DE FÓRMULA 1</h1>
+        <div class="d-flex justify-content-between align-items-center px-4 mt-4">
+            <h1 class="page-title mb-0">VEHÍCULOS DE FÓRMULA 1</h1>
+            <button id="addVehicleBtn" class="btn btn-success btn-lg rounded-pill">
+                <i class="fas fa-plus me-2"></i> Añadir Vehículo
+            </button>
+        </div>
         
         <div id="loading" class="loading">
             <div class="spinner-border text-light" role="status">
@@ -58,9 +63,235 @@
 
         <div id="vehicles-container" class="vehicles-container" style="display: none;">
         </div>
+
+        <!-- Modal para añadir vehículo -->
+        <div class="modal fade" id="addVehicleModal" tabindex="-1" aria-labelledby="addVehicleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-dark text-white">
+                        <h5 class="modal-title" id="addVehicleModalLabel">Añadir Nuevo Vehículo F1</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="addVehicleForm">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="equipo" class="form-label">Equipo</label>
+                                    <select class="form-select" id="equipo" required>
+                                        <option value="">Seleccionar equipo</option>
+                                        <option value="Red Bull Racing">Red Bull Racing</option>
+                                        <option value="Mercedes-AMG Petronas">Mercedes-AMG Petronas</option>
+                                        <option value="Ferrari">Ferrari</option>
+                                        <option value="McLaren">McLaren</option>
+                                        <option value="Aston Martin">Aston Martin</option>
+                                        <option value="Alpine">Alpine</option>
+                                        <option value="Williams">Williams</option>
+                                        <option value="Haas">Haas</option>
+                                        <option value="Visa Cash App Racing Bulls">Visa Cash App Racing Bulls</option>
+                                        <option value="Alfa Romeo">Alfa Romeo</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="modelo" class="form-label">Modelo</label>
+                                    <input type="text" class="form-control" id="modelo" placeholder="Ej: RB20" required>
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="motor" class="form-label">Motor</label>
+                                    <input type="text" class="form-control" id="motor" placeholder="Ej: Honda RBPT" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="imagen" class="form-label">URL de Imagen</label>
+                                    <input type="url" class="form-control" id="imagen" placeholder="https://ejemplo.com/imagen.jpg">
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="velocidad_max_kmh" class="form-label">Velocidad Máxima (km/h)</label>
+                                    <input type="number" class="form-control" id="velocidad_max_kmh" min="250" max="400" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="aceleracion_0_100" class="form-label">Aceleración 0-100 (segundos)</label>
+                                    <input type="number" class="form-control" id="aceleracion_0_100" step="0.1" min="1.5" max="5" required>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Pilotos Asignados</label>
+                                <div id="pilotosContainer" class="border rounded p-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="pilotos" id="piloto1" value="1">
+                                        <label class="form-check-label" for="piloto1">Cargando pilotos...</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <h5 class="mt-4">Rendimiento por Modo</h5>
+                            
+                            <!-- Rendimiento - Modo Normal -->
+                            <div class="card mb-3">
+                                <div class="card-header bg-light">Modo Normal</div>
+                                <div class="card-body">
+                                    <div class="row mb-3">
+                                        <div class="col-md-12">
+                                            <label for="normal_velocidad" class="form-label">Velocidad promedio (km/h)</label>
+                                            <input type="number" class="form-control" id="normal_velocidad" min="200" max="350" required>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h6>Consumo combustible (L/lap)</h6>
+                                            <div class="input-group mb-2">
+                                                <span class="input-group-text">Seco</span>
+                                                <input type="number" class="form-control" id="normal_consumo_seco" step="0.1" min="1" max="5" required>
+                                            </div>
+                                            <div class="input-group mb-2">
+                                                <span class="input-group-text">Lluvioso</span>
+                                                <input type="number" class="form-control" id="normal_consumo_lluvioso" step="0.1" min="1" max="5" required>
+                                            </div>
+                                            <div class="input-group mb-2">
+                                                <span class="input-group-text">Extremo</span>
+                                                <input type="number" class="form-control" id="normal_consumo_extremo" step="0.1" min="1" max="5" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6>Desgaste neumáticos (%/lap)</h6>
+                                            <div class="input-group mb-2">
+                                                <span class="input-group-text">Seco</span>
+                                                <input type="number" class="form-control" id="normal_desgaste_seco" step="0.1" min="0.5" max="5" required>
+                                            </div>
+                                            <div class="input-group mb-2">
+                                                <span class="input-group-text">Lluvioso</span>
+                                                <input type="number" class="form-control" id="normal_desgaste_lluvioso" step="0.1" min="0.5" max="5" required>
+                                            </div>
+                                            <div class="input-group mb-2">
+                                                <span class="input-group-text">Extremo</span>
+                                                <input type="number" class="form-control" id="normal_desgaste_extremo" step="0.1" min="0.5" max="5" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Rendimiento - Modo Agresivo -->
+                            <div class="card mb-3">
+                                <div class="card-header bg-light">Modo Agresivo</div>
+                                <div class="card-body">
+                                    <div class="row mb-3">
+                                        <div class="col-md-12">
+                                            <label for="agresivo_velocidad" class="form-label">Velocidad promedio (km/h)</label>
+                                            <input type="number" class="form-control" id="agresivo_velocidad" min="220" max="370" required>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h6>Consumo combustible (L/lap)</h6>
+                                            <div class="input-group mb-2">
+                                                <span class="input-group-text">Seco</span>
+                                                <input type="number" class="form-control" id="agresivo_consumo_seco" step="0.1" min="1.5" max="6" required>
+                                            </div>
+                                            <div class="input-group mb-2">
+                                                <span class="input-group-text">Lluvioso</span>
+                                                <input type="number" class="form-control" id="agresivo_consumo_lluvioso" step="0.1" min="1.5" max="6" required>
+                                            </div>
+                                            <div class="input-group mb-2">
+                                                <span class="input-group-text">Extremo</span>
+                                                <input type="number" class="form-control" id="agresivo_consumo_extremo" step="0.1" min="1.5" max="6" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6>Desgaste neumáticos (%/lap)</h6>
+                                            <div class="input-group mb-2">
+                                                <span class="input-group-text">Seco</span>
+                                                <input type="number" class="form-control" id="agresivo_desgaste_seco" step="0.1" min="1" max="7" required>
+                                            </div>
+                                            <div class="input-group mb-2">
+                                                <span class="input-group-text">Lluvioso</span>
+                                                <input type="number" class="form-control" id="agresivo_desgaste_lluvioso" step="0.1" min="1" max="7" required>
+                                            </div>
+                                            <div class="input-group mb-2">
+                                                <span class="input-group-text">Extremo</span>
+                                                <input type="number" class="form-control" id="agresivo_desgaste_extremo" step="0.1" min="1" max="7" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Rendimiento - Modo Eco -->
+                            <div class="card mb-3">
+                                <div class="card-header bg-light">Modo Eco</div>
+                                <div class="card-body">
+                                    <div class="row mb-3">
+                                        <div class="col-md-12">
+                                            <label for="eco_velocidad" class="form-label">Velocidad promedio (km/h)</label>
+                                            <input type="number" class="form-control" id="eco_velocidad" min="180" max="320" required>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h6>Consumo combustible (L/lap)</h6>
+                                            <div class="input-group mb-2">
+                                                <span class="input-group-text">Seco</span>
+                                                <input type="number" class="form-control" id="eco_consumo_seco" step="0.1" min="0.8" max="3" required>
+                                            </div>
+                                            <div class="input-group mb-2">
+                                                <span class="input-group-text">Lluvioso</span>
+                                                <input type="number" class="form-control" id="eco_consumo_lluvioso" step="0.1" min="0.8" max="3" required>
+                                            </div>
+                                            <div class="input-group mb-2">
+                                                <span class="input-group-text">Extremo</span>
+                                                <input type="number" class="form-control" id="eco_consumo_extremo" step="0.1" min="0.8" max="3" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6>Desgaste neumáticos (%/lap)</h6>
+                                            <div class="input-group mb-2">
+                                                <span class="input-group-text">Seco</span>
+                                                <input type="number" class="form-control" id="eco_desgaste_seco" step="0.1" min="0.3" max="3" required>
+                                            </div>
+                                            <div class="input-group mb-2">
+                                                <span class="input-group-text">Lluvioso</span>
+                                                <input type="number" class="form-control" id="eco_desgaste_lluvioso" step="0.1" min="0.3" max="3" required>
+                                            </div>
+                                            <div class="input-group mb-2">
+                                                <span class="input-group-text">Extremo</span>
+                                                <input type="number" class="form-control" id="eco_desgaste_extremo" step="0.1" min="0.3" max="3" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" id="saveVehicleBtn">Guardar Vehículo</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toast para notificaciones -->
+        <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+            <div id="notificationToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <strong class="me-auto" id="toastTitle">Notificación</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body" id="toastMessage">
+                    Mensaje de notificación
+                </div>
+            </div>
+        </div>
     </main>
 
-
+    <!-- Font Awesome para iconos -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/vehiculos.js"></script>
 </body>
-<script src="../js/vehiculos.js"> </script>
 </html>
