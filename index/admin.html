@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+      <link rel="stylesheet" href="../css/admin.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏎️ Gestión Fórmula 1</h1>
+            <p>Sistema de administración de pilotos, circuitos y vehículos</p>
+        </div>
+
+        <nav class="main-nav">
+            <button class="nav-button active" data-section="pilotos">Pilotos</button>
+            <button class="nav-button" data-section="circuitos">Circuitos</button>
+            <button class="nav-button" data-section="vehiculos">Vehículos</button>
+        </nav>
+
+        <div class="content">
+            <div id="content-area">
+                <div class="loading">Cargando datos...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para editar -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Editar</h3>
+                <span class="close">&times;</span>
+            </div>
+            <form id="editForm">
+                <div id="formFields"></div>
+                <div class="modal-buttons">
+                    <button type="submit" class="btn-save">Guardar</button>
+                    <button type="button" class="btn-cancel">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+<script src="../js/admin.js"></script>
+</html>
