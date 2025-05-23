@@ -1,6 +1,4 @@
-
-  // Función principal para cargar los datos desde la API
-  document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
     const circuitCarousel = document.getElementById('circuitCarousel');
     const loading = document.getElementById('loading');
     const prevBtn = document.getElementById('prevCircuit');
@@ -10,18 +8,14 @@
     const btnGuardarCircuito = document.getElementById('btnGuardarCircuito');
     const alertContainer = document.getElementById('alertContainer');
 
-    // Variables para controlar el carrusel
     let currentIndex = 0;
     let circuitCount = 0;
     let allData = null;
 
-    // URL de la API
     const apiUrl = 'https://6818a31e5a4b07b9d1d01ad4.mockapi.io/api/v1/Proyecto';
 
-    // Cargar datos iniciales
     loadCircuits();
 
-    // Función para cargar circuitos
     function loadCircuits() {
       fetch(apiUrl)
         .then(response => {
@@ -41,7 +35,7 @@
         });
     }
 
-    // Función para procesar y mostrar los circuitos desde los datos de la API
+
     function processAndDisplayCircuits(data) {
       if (!data || !data[0] || !data[0].circuitos) {
         loading.innerHTML = 'Error: Formato de datos inesperado';
@@ -63,7 +57,6 @@
       updateCarousel();
     }
 
-    // Función para crear un slide de circuito con información extendida
     function createCircuitSlide(circuito, pilotos) {
       const slide = document.createElement('div');
       slide.className = 'circuit-slide';
@@ -134,7 +127,6 @@
       return slide;
     }
 
-    // Función para obtener URL de bandera según el país
     function getBanderaPais(pais) {
       const banderas = {
         'Mónaco': 'https://upload.wikimedia.org/wikipedia/commons/e/ea/Flag_of_Monaco.svg',
@@ -158,12 +150,9 @@
       return banderas[pais] || 'https://upload.wikimedia.org/wikipedia/commons/9/97/Flag_of_the_FIA.svg';
     }
 
-    // Función para actualizar la visualización del carrusel
     function updateCarousel() {
       circuitCarousel.style.transform = `translateX(-${currentIndex * 100}%)`;
     }
-
-    // Función para mostrar alertas
     function showAlert(message, type = 'success') {
       const alertDiv = document.createElement('div');
       alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
@@ -180,18 +169,15 @@
       }, 5000);
     }
 
-    // Función para limpiar el formulario
     function clearForm() {
       document.getElementById('formAgregarCircuito').reset();
       alertContainer.innerHTML = '';
     }
 
-    // Función para generar ID único
     function generateId() {
       return Date.now().toString();
     }
 
-    // Event listeners para los botones de navegación
     prevBtn.addEventListener('click', function() {
       if (currentIndex > 0) {
         currentIndex--;
@@ -206,22 +192,23 @@
       }
     });
 
-    // Event listener para el botón de agregar circuito
+
     btnAgregarCircuito.addEventListener('click', function() {
       clearForm();
       modalAgregarCircuito.show();
     });
 
-    // Event listener para guardar circuito
+
     btnGuardarCircuito.addEventListener('click', function() {
-      // Validar formulario
+
       const form = document.getElementById('formAgregarCircuito');
       if (!form.checkValidity()) {
         form.reportValidity();
         return;
       }
 
-      // Recopilar datos del formulario
+
+
       const nuevoCircuito = {
         id: generateId(),
         nombre: document.getElementById('nombreCircuito').value.trim(),
@@ -233,7 +220,7 @@
         ganadores: []
       };
 
-      // Agregar récord si se proporcionó información
+ 
       const tiempoRecord = document.getElementById('tiempoRecord').value.trim();
       const pilotoRecord = document.getElementById('pilotoRecord').value.trim();
       const anoRecord = document.getElementById('anoRecord').value;
@@ -246,15 +233,15 @@
         };
       }
 
-      // Deshabilitar botón mientras se guarda
+
       btnGuardarCircuito.disabled = true;
       btnGuardarCircuito.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Guardando...';
 
-      // Agregar el nuevo circuito a los datos existentes
+
       if (allData && allData[0] && allData[0].circuitos) {
         allData[0].circuitos.push(nuevoCircuito);
 
-        // Enviar datos actualizados a la API
+
         fetch(apiUrl + '/1', {
           method: 'PUT',
           headers: {
@@ -271,14 +258,14 @@
         .then(data => {
           showAlert('<i class="fas fa-check-circle me-2"></i>¡Circuito agregado exitosamente!', 'success');
           
-          // Actualizar la visualización
+
           processAndDisplayCircuits([data]);
           
-          // Ir al último circuito (el recién agregado)
+
           currentIndex = circuitCount - 1;
           updateCarousel();
           
-          // Cerrar modal después de 2 segundos
+
           setTimeout(() => {
             modalAgregarCircuito.hide();
           }, 2000);
@@ -287,11 +274,11 @@
           console.error('Error:', error);
           showAlert('<i class="fas fa-exclamation-triangle me-2"></i>Error al guardar el circuito: ' + error.message, 'danger');
           
-          // Remover el circuito de los datos locales si falló
+
           allData[0].circuitos.pop();
         })
         .finally(() => {
-          // Rehabilitar botón
+
           btnGuardarCircuito.disabled = false;
           btnGuardarCircuito.innerHTML = '<i class="fas fa-save me-2"></i>Guardar Circuito';
         });
@@ -302,7 +289,7 @@
       }
     });
 
-    // Event listener para limpiar alertas cuando se cierra el modal
+
     document.getElementById('modalAgregarCircuito').addEventListener('hidden.bs.modal', function() {
       clearForm();
     });

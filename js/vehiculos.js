@@ -1,7 +1,5 @@
-// API URL
 const API_URL = 'https://6818a31e5a4b07b9d1d01ad4.mockapi.io/api/v1/Proyecto';
 
-// Team CSS class mapping
 const teamClasses = {
     'Red Bull Racing': 'card-red-bull',
     'Mercedes-AMG Petronas': 'card-mercedes',
@@ -19,26 +17,26 @@ const teamClasses = {
     'Williams': 'card-williams'
 };
 
-// Variables globales para almacenar los datos de la API
+
 let f1Data = null;
 let pilotosData = [];
 
-// Inicializar la página
+
 document.addEventListener('DOMContentLoaded', async () => {
-    // Cargar los datos iniciales
+
     await loadVehicles();
     
-    // Configurar el botón para abrir el modal
+
     const addVehicleBtn = document.getElementById('addVehicleBtn');
     const addVehicleModal = new bootstrap.Modal(document.getElementById('addVehicleModal'));
     
     addVehicleBtn.addEventListener('click', () => {
-        // Cargar pilotos en el modal antes de abrirlo
+
         loadPilotosCheckboxes();
         addVehicleModal.show();
     });
     
-    // Configurar el botón para guardar el vehículo
+
     const saveVehicleBtn = document.getElementById('saveVehicleBtn');
     saveVehicleBtn.addEventListener('click', saveVehicle);
 });
@@ -51,7 +49,7 @@ async function fetchF1Data() {
         }
         const data = await response.json();
         console.log('API Data:', data);
-        return data[0]; // Get the first (and only) object from the array
+        return data[0]; 
     } catch (error) {
         console.error('Error fetching data:', error);
         return null;
@@ -248,12 +246,12 @@ function showPerformance(teamName, mode) {
     const containerId = `performance-${teamName.replace(/\s+/g, '-')}`;
     const container = document.getElementById(containerId);
     
-    // Update tabs
+
     const tabs = container.parentElement.querySelectorAll('.performance-tab');
     tabs.forEach(tab => tab.classList.remove('active'));
     event.target.classList.add('active');
     
-    // Update content
+
     const contents = container.querySelectorAll('.performance-content');
     contents.forEach(content => content.classList.remove('active'));
     
@@ -275,16 +273,16 @@ async function loadVehicles() {
         }
 
         const { vehiculos, pilotos } = f1Data;
-        pilotosData = pilotos; // Guardar los pilotos para uso posterior
+        pilotosData = pilotos; 
         
-        // Create vehicle cards
+        
         const vehiclesHTML = vehiculos.map(vehicle => 
             createVehicleCard(vehicle, pilotos)
         ).join('');
         
         containerElement.innerHTML = vehiclesHTML;
         
-        // Hide loading and show content
+
         loadingElement.style.display = 'none';
         containerElement.style.display = 'grid';
         
@@ -303,7 +301,7 @@ async function loadVehicles() {
     }
 }
 
-// Función para cargar pilotos en el modal
+
 function loadPilotosCheckboxes() {
     const pilotosContainer = document.getElementById('pilotosContainer');
     
@@ -312,7 +310,7 @@ function loadPilotosCheckboxes() {
         return;
     }
     
-    // Crear checkboxes para cada piloto
+
     const checkboxesHTML = pilotosData.map(piloto => `
         <div class="form-check mb-2">
             <input class="form-check-input" type="checkbox" name="pilotos" id="piloto-${piloto.id}" value="${piloto.id}">
@@ -325,7 +323,7 @@ function loadPilotosCheckboxes() {
     pilotosContainer.innerHTML = checkboxesHTML;
 }
 
-// Función para mostrar notificaciones
+
 function showNotification(title, message, type = 'success') {
     const toastTitle = document.getElementById('toastTitle');
     const toastMessage = document.getElementById('toastMessage');
@@ -334,7 +332,7 @@ function showNotification(title, message, type = 'success') {
     toastTitle.textContent = title;
     toastMessage.textContent = message;
     
-    // Aplicar color según el tipo
+
     toastElement.className = 'toast';
     if (type === 'error') {
         toastElement.classList.add('bg-danger', 'text-white');
@@ -348,7 +346,6 @@ function showNotification(title, message, type = 'success') {
     toast.show();
 }
 
-// Función para recoger los valores del formulario
 function getFormValues() {
     const equipo = document.getElementById('equipo').value;
     const modelo = document.getElementById('modelo').value;
@@ -357,11 +354,11 @@ function getFormValues() {
     const velocidad_max_kmh = parseInt(document.getElementById('velocidad_max_kmh').value);
     const aceleracion_0_100 = parseFloat(document.getElementById('aceleracion_0_100').value);
     
-    // Recoger pilotos seleccionados
+
     const pilotosCheckboxes = document.querySelectorAll('input[name="pilotos"]:checked');
     const pilotos = Array.from(pilotosCheckboxes).map(cb => cb.value);
     
-    // Valores de rendimiento - modo normal
+  
     const normal_velocidad = parseInt(document.getElementById('normal_velocidad').value);
     const normal_consumo_seco = parseFloat(document.getElementById('normal_consumo_seco').value);
     const normal_consumo_lluvioso = parseFloat(document.getElementById('normal_consumo_lluvioso').value);
@@ -370,7 +367,7 @@ function getFormValues() {
     const normal_desgaste_lluvioso = parseFloat(document.getElementById('normal_desgaste_lluvioso').value);
     const normal_desgaste_extremo = parseFloat(document.getElementById('normal_desgaste_extremo').value);
     
-    // Valores de rendimiento - modo agresivo
+
     const agresivo_velocidad = parseInt(document.getElementById('agresivo_velocidad').value);
     const agresivo_consumo_seco = parseFloat(document.getElementById('agresivo_consumo_seco').value);
     const agresivo_consumo_lluvioso = parseFloat(document.getElementById('agresivo_consumo_lluvioso').value);
@@ -379,7 +376,6 @@ function getFormValues() {
     const agresivo_desgaste_lluvioso = parseFloat(document.getElementById('agresivo_desgaste_lluvioso').value);
     const agresivo_desgaste_extremo = parseFloat(document.getElementById('agresivo_desgaste_extremo').value);
     
-    // Valores de rendimiento - modo eco
     const eco_velocidad = parseInt(document.getElementById('eco_velocidad').value);
     const eco_consumo_seco = parseFloat(document.getElementById('eco_consumo_seco').value);
     const eco_consumo_lluvioso = parseFloat(document.getElementById('eco_consumo_lluvioso').value);
@@ -388,7 +384,7 @@ function getFormValues() {
     const eco_desgaste_lluvioso = parseFloat(document.getElementById('eco_desgaste_lluvioso').value);
     const eco_desgaste_extremo = parseFloat(document.getElementById('eco_desgaste_extremo').value);
     
-    // Crear estructura de datos para el vehículo
+
     const vehicleData = {
         equipo,
         modelo,
@@ -443,9 +439,7 @@ function getFormValues() {
     return vehicleData;
 }
 
-// Función para validar el formulario
 function validateVehicleForm() {
-    // Comprobar que todos los campos requeridos tienen valores
     const requiredFields = [
         'equipo', 'modelo', 'motor', 'velocidad_max_kmh', 'aceleracion_0_100',
         'normal_velocidad', 'normal_consumo_seco', 'normal_consumo_lluvioso', 'normal_consumo_extremo',
@@ -465,7 +459,6 @@ function validateVehicleForm() {
         }
     }
     
-    // Comprobar que al menos un piloto está seleccionado
     const pilotosCheckboxes = document.querySelectorAll('input[name="pilotos"]:checked');
     if (pilotosCheckboxes.length === 0) {
         showNotification('Error de validación', 'Debe seleccionar al menos un piloto', 'error');
@@ -475,7 +468,6 @@ function validateVehicleForm() {
     return true;
 }
 
-// Función para guardar el vehículo
 async function saveVehicle() {
     if (!validateVehicleForm()) {
         return;
@@ -489,13 +481,10 @@ async function saveVehicle() {
     try {
         const vehicleData = getFormValues();
         
-        // Clonar los datos actuales para no modificar el original
         const updatedData = JSON.parse(JSON.stringify(f1Data));
         
-        // Añadir el nuevo vehículo
         updatedData.vehiculos.push(vehicleData);
         
-        // Actualizar via API
         const response = await fetch(API_URL + '/1', {
             method: 'PUT',
             headers: {
@@ -508,17 +497,16 @@ async function saveVehicle() {
             throw new Error(`Error al guardar: ${response.status}`);
         }
         
-        // Cerrar el modal y recargar los vehículos
+
         const addVehicleModal = bootstrap.Modal.getInstance(document.getElementById('addVehicleModal'));
         addVehicleModal.hide();
         
-        // Limpiar el formulario
+
         document.getElementById('addVehicleForm').reset();
         
-        // Mostrar notificación de éxito
+ 
         showNotification('Vehículo añadido', `El vehículo ${vehicleData.modelo} ha sido añadido correctamente`);
         
-        // Recargar los vehículos
         await loadVehicles();
         
     } catch (error) {

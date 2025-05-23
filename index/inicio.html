@@ -10,9 +10,8 @@
 </head>
 <body>
   
-  <!-- Header como en la imagen compartida -->
   <header class="d-flex align-items-center justify-content-between w-100 header-f1">
-    <!-- Logo F1 -->
+
     <div class="logo-container">
       <a href="../index.html">
       <img src="../imgs/image_2.webp" alt="F1 Logo" style="width: 100px; height: auto;">
@@ -31,37 +30,35 @@
     </nav>
   </header>
 
-  <!-- Main content with carousel -->
+
   <main class="flex-grow-1 d-flex align-items-center justify-content-center position-relative overflow-hidden" style="z-index: 1;">
     <div class="position-relative z-1 w-100 container-fluid px-5 d-flex align-items-center">
-      <!-- Left arrow -->
+
       <button id="prev-button" class="carousel-arrow start-0 ms-4">
         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="m15 18-6-6 6-6"></path>
         </svg>
       </button>
       
-      <!-- Main carousel slide container -->
+
       <div class="w-100 d-flex justify-content-center">
         <div class="carousel-container">
-          <!-- Slide 1 -->
+
           <div class="carousel-slide" data-title="Nuestros Equipos & Pilotos" data-module="equipos-pilotos">
             <img src="../imgs/image1.jpg" alt="Equipos y Pilotos" >
           </div>
           
-          <!-- Slide 2 -->
+
           <div class="carousel-slide hidden" data-title="Circuitos & Simulación" data-module="circuitos-simulacion">
             <img src="../imgs/image3.jpg" alt="Circuitos y Simulación" class="img-fluid">
           </div>
           
-          <!-- Slide 3 -->
           <div class="carousel-slide hidden" data-title="Gestión de vehiculos" data-module="resultados-estadisticas">
             <img src="../imgs/image2.png" alt="Gestión de vehiculos" class="img-fluid">
           </div>
         </div>
       </div>
       
-      <!-- Right arrow -->
       <button id="next-button" class="carousel-arrow end-0 me-4">
         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="m9 18 6-6-6-6"></path>
@@ -70,7 +67,7 @@
     </div>
   </main>
   
-  <!-- Footer section with dynamic text -->
+
   <footer class="py-5 text-center" style="background: transparent; position: relative; z-index: 10;">
     <h2 id="title-text" class="display-5 fw-bold tracking-widest mb-2 text-white" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">
       Nuestros Equipos 
@@ -78,7 +75,7 @@
     </h2>
   </footer>
 
-  <!-- Modal de confirmación -->
+
   <div class="modal fade" id="navigationModal" tabindex="-1" aria-labelledby="navigationModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">

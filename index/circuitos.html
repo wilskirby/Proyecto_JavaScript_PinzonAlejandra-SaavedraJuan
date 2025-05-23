@@ -10,9 +10,7 @@
 </head>
 <body>
 
-  <!-- Header como en la imagen compartida -->
   <header class="d-flex align-items-center justify-content-between w-100 header-f1">
-    <!-- Logo F1 -->
     <div class="logo-container">
       <a href="./inicio.html">
       <img src="../imgs/image_2.webp" alt="F1 Logo" style="width: 100px; height: auto;">
@@ -46,18 +44,17 @@
     </div>
   </header>
 
-  <!-- Indicador de carga -->
   <div id="loading" class="loading">
     Cargando Circuitos...
   </div>
 
-  <!-- Carrusel de circuitos -->
+
   <div class="circuit-carousel-container">
     <div class="circuit-carousel" id="circuitCarousel">
-      <!-- Los circuitos se cargarán aquí -->
+      
     </div>
     
-    <!-- Controles de carrusel -->
+    
     <button class="carousel-control prev" id="prevCircuit">
       <i class="fas fa-chevron-left"></i>
     </button>
@@ -66,12 +63,12 @@
     </button>
   </div>
 
-  <!-- Botón para agregar circuito -->
+  
   <div class="d-flex justify-content-center mt-4">
     <button class="btn-agregar-circuito" id="btnAgregarCircuito">AGREGAR CIRCUITO</button>
   </div>
 
-  <!-- Modal para agregar circuito -->
+  
   <div class="modal fade" id="modalAgregarCircuito" tabindex="-1" aria-labelledby="modalAgregarCircuitoLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -82,7 +79,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <!-- Alertas -->
+          
           <div id="alertContainer"></div>
           
           <form id="formAgregarCircuito">

@@ -10,14 +10,11 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentSlide = 0;
     let selectedModule = '';
     
-    // Configuración de módulos y sus URLs
     const moduleRoutes = {
       'equipos-pilotos': '../index/pilotos.html',
       'circuitos-simulacion': '../index/circuitos.html',
       'resultados-estadisticas': '../index/vehiculos.html'
     };
-    
-    // Function to update slide visibility
     function showSlide(index) {
       slides.forEach(slide => {
         slide.classList.add('hidden');
@@ -33,19 +30,16 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
     
-    // Next slide function
     function nextSlide() {
       currentSlide = (currentSlide + 1) % slides.length;
       showSlide(currentSlide);
     }
     
-    // Previous slide function
     function prevSlide() {
       currentSlide = (currentSlide - 1 + slides.length) % slides.length;
       showSlide(currentSlide);
     }
     
-    // Handle slide click for navigation
     function handleSlideClick(event) {
       const slide = event.currentTarget;
       const module = slide.dataset.module;
@@ -55,27 +49,23 @@ document.addEventListener('DOMContentLoaded', function() {
       moduleTitle.textContent = title;
       navigationModal.show();
     }
-    
-    // Handle navigation confirmation
+
 function handleNavigation() {
 if (selectedModule && moduleRoutes[selectedModule]) {
-  // Redirigir a la página correspondiente
+
   window.location.href = moduleRoutes[selectedModule];
 }
 navigationModal.hide();
 }
-    
-    // Add event listeners
+
     nextButton.addEventListener('click', nextSlide);
     prevButton.addEventListener('click', prevSlide);
     confirmButton.addEventListener('click', handleNavigation);
-    
-    // Add click event listeners to all slides
+
     slides.forEach(slide => {
       slide.addEventListener('click', handleSlideClick);
     });
-    
-    // Keyboard navigation
+
     document.addEventListener('keydown', function(event) {
       if (event.key === 'ArrowLeft') {
         prevSlide();
@@ -86,15 +76,12 @@ navigationModal.hide();
         handleSlideClick({ currentTarget: currentSlideElement });
       }
     });
-    
-    // Show initial slide
+
     showSlide(currentSlide);
     
-    // Auto-hide modal after showing for demo purposes
     document.getElementById('navigationModal').addEventListener('shown.bs.modal', function() {
       setTimeout(() => {
-        // Opcional: auto-hide después de 5 segundos para demo
-        // navigationModal.hide();
+
       }, 5000);
     });
   });

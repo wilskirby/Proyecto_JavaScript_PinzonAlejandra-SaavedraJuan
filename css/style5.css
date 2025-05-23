@@ -4,7 +4,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-image: url("../imgs/imagen6.jpeg"); /* Reemplazar con tu URL real */
+    background-image: url("../imgs/imagen6.jpeg"); 
     background-size: cover;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
     url("../imgs/imagen6.jpeg");
@@ -37,18 +37,18 @@ body {
     background-color: rgba(173, 181, 189, 0.7);
     border-radius: 8px;
     overflow: hidden;
-    cursor: pointer; /* Añadido para indicar que es clickeable */
+    cursor: pointer; 
     transform: scale(1);
   }
   
   .carousel-slide:hover {
-    transform: scale(1.02); /* Efecto hover para indicar interactividad */
+    transform: scale(1.02); 
     box-shadow: 0 10px 25px rgba(0,0,0,0.3);
   }
   
   .carousel-slide.hidden {
     opacity: 0;
-    pointer-events: none; /* Prevenir clicks en slides ocultos */
+    pointer-events: none; 
   }
   
   .carousel-slide img {
@@ -62,7 +62,7 @@ body {
     transform: scale(1.05);
   }
   
-  /* Overlay para indicar que es clickeable */
+  
   .carousel-slide::after {
     content: "🖱️ Click para acceder";
     position: absolute;
@@ -123,7 +123,6 @@ body {
     letter-spacing: 0.15em;
   }
 
-  /* Modal styles para confirmación */
 
 
   .modal-header {
